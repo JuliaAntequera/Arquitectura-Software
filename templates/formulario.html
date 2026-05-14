@@ -1,0 +1,22 @@
+{% block content %}
+  <h2>{{ titulo }}</h2>
+  <form method="post">
+    {% csrf_token %}
+
+    {% for campo in form %}
+        <div style="margin-bottom: 10px;">
+            <label for="{{ campo.id_for_label }}">{{ campo.label }}</label><br>
+            {{ campo }}
+                {% if campo.errors %}
+                    <div style="color: red;">
+                        {{ campo.errors }}
+                    </div>
+                {% endif %}
+        </div>
+    {% endfor %}
+
+    <button type="submit">Guardar</button>
+    <br>
+    <a href="{% url 'lista_clientes' %}">Volver a la lista de clientes</a>
+  </form>
+{% endblock %}
